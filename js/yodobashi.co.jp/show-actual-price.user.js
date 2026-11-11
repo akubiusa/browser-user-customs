@@ -25,10 +25,10 @@
       return;
     }
 
-    const price = unitPriceElement.innerText.replace("￥", "").replace(",", "");
+    const price = unitPriceElement.innerText.replace("￥", "").replaceAll(",", "");
     const point = pointValueElement.innerText
       .replace("ポイント", "")
-      .replace(",", "");
+      .replaceAll(",", "");
 
     const actualPrice = price - point;
     const newActualPriceElement = document.createElement("span");
