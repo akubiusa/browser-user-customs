@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show actual price in yodobashi.co.jp
 // @namespace    tomacheese.com
-// @version      1.0.0
+// @version      1.0.1
 // @description  ヨドバシの商品ページで販売価格からポイントを引いた実質価格を表示する
 // @author       Tomachi <tomachi@tomacheese.com> (https://github.com/book000)
 // @homepageURL  https://github.com/book000/browser-user-customs
