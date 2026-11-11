@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Remove max-height and max-width from chat input in Microsoft Copilot
 // @namespace    tomacheese.com
-// @version      1.0.0
-// @description  Remove max-height and max-width from chat input in Microsoft Copilot to make it easier to read and write code in the chat input box
+// @version      1.0.1
+// @description  Microsoft Copilot のチャット入力欄から max-height と max-width を外し、コードを読み書きしやすくする
 // @author       Tomachi <tomachi@tomacheese.com> (https://github.com/book000)
 // @homepageURL  https://github.com/book000/browser-user-customs
 // @supportURL   https://github.com/book000/browser-user-customs/issues
@@ -25,7 +25,6 @@
       "#m365-chat-editor-target-element",
     ];
 
-    // remove max-height and max-width
     for (const selector of selectors) {
       const element = document.querySelector(selector);
       if (element) {

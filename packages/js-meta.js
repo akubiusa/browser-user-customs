@@ -9,7 +9,6 @@ function parse(path) {
 }
 
 function getJsFiles(path) {
-  // recursively get all js files
   const files = fs.readdirSync(path);
   const jsFiles = [];
   for (const file of files) {

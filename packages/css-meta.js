@@ -8,7 +8,6 @@ function parse(path) {
 }
 
 function getCssFiles(path) {
-  // recursively get all css files
   const files = fs.readdirSync(path);
   const cssFiles = [];
   for (const file of files) {
