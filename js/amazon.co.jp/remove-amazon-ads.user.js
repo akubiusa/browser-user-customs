@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Advertising items semi-transparent on amazon.co.jp
 // @namespace    tomacheese.com
-// @version      1.0.0
+// @version      1.0.1
 // @description  Amazonで広告系アイテムを半透明化する。
 // @author       Tomachi <tomachi@tomacheese.com> (https://github.com/book000)
 // @homepageURL  https://github.com/book000/browser-user-customs
@@ -23,9 +23,8 @@
     document
       .querySelectorAll("a.puis-sponsored-label-text")
       .forEach((element) => {
-        const target =
-          element.parentNode.parentNode.parentNode.parentNode.parentNode
-            .parentNode.parentNode.parentNode.parentNode.parentNode;
+        const target = element.closest('[data-component-type="s-search-result"]');
+        if (!target) return;
         if (opacity === 0) {
           target.style.display = "none";
         }
