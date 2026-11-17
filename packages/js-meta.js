@@ -31,7 +31,7 @@ function getUpdatedFiles(directory) {
       return [];
     }
 
-    const cmd = `git diff --name-only ${baseSha} HEAD`;
+    const cmd = `git diff --name-only --diff-filter=ACMRT ${baseSha} HEAD`;
     const stdout = execSync(cmd, { encoding: "utf8" });
     return stdout
       .split("\n")
