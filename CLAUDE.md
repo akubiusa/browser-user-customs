@@ -14,7 +14,7 @@ organized by target domain and published as an index page on
   (e.g. `css/amazon.co.jp/`).
 - `js/<domain>/*.user.js` — userscripts, one directory per target domain.
 - `packages/` — Node scripts (no build output committed):
-  - `css-meta.js` / `js-meta.js` — metadata validators run by `npm run lint`.
+  - `css-meta.js` / `js-meta.js` — `npm run lint` でメタデータを検証し、`js-meta.js` は構文も検査する。
   - `generate-pages.js` — renders `packages/template.html` into
     `dist/index.html` for GitHub Pages.
 - `css/README.md` / `js/README.md` — the canonical metadata header templates.
@@ -22,10 +22,10 @@ organized by target domain and published as an index page on
 
 ## Development commands
 
-- `npm run lint` — validate every custom file's metadata (runs `lint-css` and
-  `lint-js` in parallel). Also runs in CI on every push / PR.
+- `npm run lint` — 全カスタムファイルのメタデータとユーザースクリプトの構文を検査する。`lint-css` と `lint-js` を並列実行し、CI でも実行する。
 - `npm run lint-css` — `node packages/css-meta.js`.
 - `npm run lint-js` — `node packages/js-meta.js`.
+- `npm test` — Node.js のテストを実行する。CI でも実行する。
 - `npm run generate-pages` — regenerate `dist/index.html`. Run in CI on push to
   `master` (the `Deploy Pages` workflow also triggers on `main`); no need to
   commit the output.
@@ -54,7 +54,7 @@ Every `*.user.css` / `*.user.js` metadata header must satisfy:
 2. Copy the header template from `css/README.md` or `js/README.md` and fill in
    the fields, keeping the fixed values above.
 3. Set `updateURL` (and `downloadURL` for JS) to the path matching the new file.
-4. Run `npm run lint` locally before committing.
+4. コミット前に `npm run lint` と `npm test` をローカルで実行する。
 
 ## Conventions
 

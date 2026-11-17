@@ -1,6 +1,6 @@
 const userScriptParser = require("userscript-parser");
 const fs = require("fs");
-const { execSync } = require("child_process");
+const { execSync, spawnSync } = require("child_process");
 
 function parse(path) {
   const data = fs.readFileSync(path, "utf8");
@@ -146,6 +146,11 @@ function main() {
     const key = jsFile.replace("./", "");
     const path = jsFile.replace("./js/", "");
     try {
+      const syntax = spawnSync(process.execPath, ["--check", jsFile], { encoding: "utf8" });
+      if (syntax.error) throw syntax.error;
+      if (syntax.status !== 0) {
+        throw new Error(`syntax check failed: ${syntax.stderr}`);
+      }
       const meta = parse(jsFile);
       metas[key] = meta;
 
