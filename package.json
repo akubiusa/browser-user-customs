@@ -8,6 +8,7 @@
     "lint": "run-p lint-css lint-js",
     "lint-css": "node packages/css-meta.js",
     "lint-js": "node packages/js-meta.js",
+    "test": "node --test",
     "generate-pages": "node packages/generate-pages.js"
   },
   "dependencies": {

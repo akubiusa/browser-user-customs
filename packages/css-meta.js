@@ -48,7 +48,7 @@ function getParentVersion(baseSha, path) {
     const cmd = `git --no-pager show ${baseSha}:${path}`;
     const stdout = execSync(cmd, { encoding: "utf8" });
     const meta = userCssMeta.parse(stdout);
-    return meta.version;
+    return meta.metadata.version;
   } catch (e) {
     console.error("Failed to get parent version:", e.message);
     return null;
@@ -110,7 +110,7 @@ function validateValues(path, result) {
 function checkVersion(path, meta) {
   const baseSha = process.env.BASE_SHA;
   const parentVersion = getParentVersion(baseSha, path);
-  const currentVersion = meta.version;
+  const currentVersion = meta.metadata.version;
 
   if (!parentVersion || !currentVersion) {
     return;
