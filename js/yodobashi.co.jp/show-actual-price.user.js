@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show actual price in yodobashi.co.jp
 // @namespace    tomacheese.com
-// @version      1.0.1
+// @version      1.0.2
 // @description  ヨドバシの商品ページで販売価格からポイントを引いた実質価格を表示する
 // @author       Tomachi <tomachi@tomacheese.com> (https://github.com/book000)
 // @homepageURL  https://github.com/book000/browser-user-customs
@@ -21,20 +21,32 @@
     const unitPriceElement = document.querySelector("#js_scl_unitPrice");
     const pointValueElement = document.querySelector("#js_scl_pointValue");
     const actualPriceElement = document.querySelector(".actual-price");
-    if (!unitPriceElement || !pointValueElement || actualPriceElement) {
+    if (!unitPriceElement || !pointValueElement) {
       return;
     }
 
-    const price = unitPriceElement.innerText.replace("￥", "").replaceAll(",", "");
-    const point = pointValueElement.innerText
+    const priceText = unitPriceElement.innerText
+      .replace("￥", "")
+      .replaceAll(",", "");
+    const pointText = pointValueElement.innerText
       .replace("ポイント", "")
       .replaceAll(",", "");
+    if (!priceText.trim() || !pointText.trim()) {
+      return;
+    }
+
+    const price = Number(priceText);
+    const point = Number(pointText);
+    if (!Number.isFinite(price) || !Number.isFinite(point)) {
+      return;
+    }
 
     const actualPrice = price - point;
-    const newActualPriceElement = document.createElement("span");
-    newActualPriceElement.classList.add("actual-price");
-    newActualPriceElement.innerText = `：実質 ${actualPrice} 円`;
-
-    unitPriceElement.parentNode.appendChild(newActualPriceElement);
+    const displayElement = actualPriceElement || document.createElement("span");
+    if (!actualPriceElement) {
+      displayElement.classList.add("actual-price");
+      unitPriceElement.parentNode.appendChild(displayElement);
+    }
+    displayElement.innerText = `：実質 ${actualPrice} 円`;
   }, 300);
 })();
