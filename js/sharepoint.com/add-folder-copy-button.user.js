@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Folder Path in SharePoint Shared Documents
 // @namespace    tomacheese.com
-// @version      1.4.0
+// @version      1.4.1
 // @description  SharePointでフォルダパスをコピーするボタンを追加する
 // @author       Tomachi <tomachi@tomacheese.com> (https://github.com/book000)
 // @homepageURL  https://github.com/book000/browser-user-customs
@@ -45,9 +45,11 @@
 
     // "Shared Documents" よりもあとが本来のパス名なので、これを取得
     const indexKeyword = "Shared Documents";
-    const index = rawFolderPath.indexOf(indexKeyword) + indexKeyword.length + 1;
+    const index = rawFolderPath.indexOf(indexKeyword);
     const folderPath =
-      index !== -1 ? rawFolderPath.slice(index) : rawFolderPath;
+      index !== -1
+        ? rawFolderPath.slice(index + indexKeyword.length + 1)
+        : rawFolderPath;
 
     const slash2greaterThanSign = folderPath.replaceAll("/", " > ") + " > ";
 
